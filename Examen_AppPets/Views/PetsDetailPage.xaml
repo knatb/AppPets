@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Examen_AppPets.Views.PetsDetailPage"
+             xmlns:converter="clr-namespace:Examen_AppPets.Converters"
+             Title="{Binding PetSelected.Name}"
+             >
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:ImageConverter x:Key="ImageConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Eliminar" Command="{Binding DeleteCommand}" />
+        <ToolbarItem Text="Guardar" Command="{Binding SaveCommand}" />
+        <ToolbarItem Text="Mapa" Command="{Binding MapCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <ActivityIndicator
+                    IsRunning="{Binding IsBusy}"
+                    d:IsRunning="True" />
+                <Image
+                    Source="{Binding ImageBase64, Converter={StaticResource ImageConverter}}" />
+                <Button
+                    Text="Tomar fotografía"
+                    Command="{Binding TakePictureCommand}" />
+                <Button
+                    Text="Seleccionar fotografía"
+                    Command="{Binding SelectPictureCommand}" />
+                <Entry 
+                    Placeholder="Name" 
+                    Text="{Binding PetSelected.Name}" />
+                <DatePicker
+                    Date="{Binding PetSelected.BirthDate}" />
+                <Entry 
+                    Placeholder="Género" 
+                    Text="{Binding PetSelected.Gender}" />
+                <Entry 
+                    Placeholder="Raza" 
+                    Text="{Binding PetSelected.Race}" />
+                <Entry 
+                    Placeholder="Weight" 
+                    Text="{Binding PetSelected.Weight}" />
+                <Entry
+                    Placeholder="Latitud"
+                    Text="{Binding PetSelected.Latitude}" />
+                <Entry
+                    Placeholder="Longitud"
+                    Text="{Binding PetSelected.Longitude}" />
+                <Button
+                    Text="Obtener ubicación"
+                    Command="{Binding GetLocationCommand}" />
+                <Editor
+                    Placeholder="Comentarios"
+                    VerticalOptions="FillAndExpand"
+                    Text="{Binding PetSelected.Comments}" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
